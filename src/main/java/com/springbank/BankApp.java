@@ -1,6 +1,6 @@
 package com.springbank;
 
-import com.springbank.UI.Menu;
+import com.springbank.ui.Menu;
 import com.springbank.config.AppConfig;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

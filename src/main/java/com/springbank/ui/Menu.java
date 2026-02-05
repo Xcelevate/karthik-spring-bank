@@ -1,6 +1,5 @@
-package com.springbank.UI;
+package com.springbank.ui;
 
-import com.springbank.BankApp;
 import org.springframework.stereotype.Component;
 
 import java.util.InputMismatchException;

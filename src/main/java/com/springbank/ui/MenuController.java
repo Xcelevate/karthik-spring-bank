@@ -1,4 +1,4 @@
-package com.springbank.UI;
+package com.springbank.ui;
 
 import com.springbank.entities.Account;
 import com.springbank.exception.AmountException;
