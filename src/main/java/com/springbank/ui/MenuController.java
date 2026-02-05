@@ -2,12 +2,13 @@ package com.springbank.ui;
 
 import com.springbank.entities.Account;
 import com.springbank.exception.AmountException;
+import com.springbank.exception.UserNotFoundException;
 import com.springbank.exception.WrongPasswordException;
 import com.springbank.service.AccountService;
 import com.springbank.service.TransactionService;
 import com.springbank.service.UserService;
 import org.springframework.stereotype.Service;
-import javax.security.auth.login.AccountNotFoundException;
+import com.springbank.exception.AccountNotFoundException;
 import java.util.List;
 
 
@@ -25,12 +26,9 @@ public class MenuController {
 
     public boolean login(String userId, String password) {
         try {
-            if (userService.findUser(userId, password))
-                return true;
-            else {
-                System.out.println("Login Failed. User not found");
-            }
-        } catch (WrongPasswordException e) {
+            userService.findUser(userId, password);
+            return true;
+        } catch (WrongPasswordException | UserNotFoundException e) {
             System.out.println("Exception : " + e.getMessage());
         }
         return false;

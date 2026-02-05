@@ -8,7 +8,7 @@ import com.springbank.repository.AccountRepository;
 import com.springbank.repository.TransactionRepository;
 import org.springframework.stereotype.Service;
 
-import javax.security.auth.login.AccountNotFoundException;
+import com.springbank.exception.AccountNotFoundException;
 import java.util.List;
 
 @Service

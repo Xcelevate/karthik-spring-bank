@@ -1,5 +1,6 @@
 package com.springbank.ui;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.InputMismatchException;
@@ -8,14 +9,14 @@ import java.util.Scanner;
 @Component
 public class Menu {
     Scanner kk;
-    MenuController ls;
+    MenuController menuControl;
     boolean currentUser;
 
-
-    public Menu(MenuController menuController) {
-        kk = new Scanner(System.in);
-        ls = menuController;
+    public Menu(MenuController menuController ,Scanner scanner) {
+        kk = scanner;
+        menuControl = menuController;
     }
+
 
     public void loginPage() {
         System.out.println("\nWelcome to Karthik's Bank Login Menu\n");
@@ -29,7 +30,7 @@ public class Menu {
                 String userId = kk.nextLine();
                 System.out.print("Please enter your password: ");
                 String password = kk.nextLine();
-                if (ls.login(userId, password)) {
+                if (menuControl.login(userId, password)) {
                     currentUser = true;
                     System.out.println("\nLogin Successful. Welcome: " + userId);
                     System.out.print("\nWelcome to Karthik's Bank \n");
@@ -52,19 +53,19 @@ public class Menu {
         String choice = kk.nextLine();
         try {
             switch (choice) {
-                case "1" -> ls.listAccounts();
+                case "1" -> menuControl.listAccounts();
                 case "2" -> {
 
                     System.out.println("Initial Amount for creation: ");
                     double amount = kk.nextDouble();
                     kk.nextLine();
-                    ls.createAccount(amount);
+                    menuControl.createAccount(amount);
 
                 }
                 case "3" -> {
                     System.out.print("Enter Account ID: ");
                     int accNo = Integer.parseInt(kk.nextLine());
-                    ls.getBalance(accNo);
+                    menuControl.getBalance(accNo);
                 }
                 case "4" -> {
                     System.out.print("Enter Account ID: ");
@@ -72,7 +73,7 @@ public class Menu {
                     System.out.print("Enter Amount to deposit: ");
                     double amount = kk.nextDouble();
                     kk.nextLine();
-                    ls.deposit(accNo, amount);
+                    menuControl.deposit(accNo, amount);
                 }
                 case "5" -> {
                     System.out.print("Enter Account ID: ");
@@ -80,7 +81,7 @@ public class Menu {
                     System.out.print("Enter Amount to withdraw: ");
                     double amount = kk.nextDouble();
                     kk.nextLine();
-                    ls.debit(accNo, amount);
+                    menuControl.debit(accNo, amount);
                 }
                 case "6" -> {
                     System.out.print("    1.Self Transfer.\n    2.Another User Transfer.\n    3.Exit\nchoose: ");
@@ -94,7 +95,7 @@ public class Menu {
                             System.out.print("Enter Amount to transfer: ");
                             double amount = kk.nextDouble();
                             kk.nextLine();
-                            ls.selfTransfer(fromAccNo, toAccNo, amount);
+                            menuControl.selfTransfer(fromAccNo, toAccNo, amount);
                         }
                         case 2 -> {
                             System.out.print("Enter From Account ID: ");
@@ -105,7 +106,7 @@ public class Menu {
                             int toAccNo = Integer.parseInt(kk.nextLine());
                             System.out.print("Enter Amount to transfer: ");
                             double amount = Double.parseDouble(kk.nextLine());
-                            ls.toUserTransfer(fromAccNo, toUserId, toAccNo, amount);
+                            menuControl.toUserTransfer(fromAccNo, toUserId, toAccNo, amount);
                         }
                         case 3 -> System.out.println("Exited.");
                         default -> System.out.println("Invalid choice. Please try again");
@@ -113,13 +114,15 @@ public class Menu {
                 }
                 case "7" -> {
                     currentUser = false;
-                    ls.logout();
+                    menuControl.logout();
                     System.out.println("logged out ");
                 }
                 default -> System.out.println("Invalid choice. Please try again");
             }
-            System.out.print("\nPlease Enter to continue... ");
-            kk.nextLine();
+            if (System.console() != null) {
+                System.out.print("\nPlease Enter to continue... ");
+                kk.nextLine();
+            }
         } catch (InputMismatchException | NumberFormatException e) {
             System.out.println("Invalid input. Please try again");
             System.out.print("\nPlease Enter to continue... ");

@@ -1,7 +1,7 @@
 package com.springbank;
 
-import com.springbank.ui.Menu;
 import com.springbank.config.AppConfig;
+import com.springbank.ui.Menu;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class BankApp {
