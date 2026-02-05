@@ -1,0 +1,25 @@
+Start with a keyword
+Common prefixes: """""findBy, readBy, getBy, queryBy, countBy, deleteBy, existsBy""""".
+Example: findByUsername(String username) → SELECT * FROM users WHERE username = ?.
+
+
+Follow with property names
+The property must match a field in your entity class.
+Example: findByEmail(String email) → looks for the email field in the entity.
+
+
+Use operators for conditions
+Keywords like GreaterThan, LessThan, Between, Like, In, Not, IsNull, StartingWith, EndingWith.
+Example:
+findByBalanceGreaterThan(double balance) → WHERE balance > ?.
+findByAgeBetween(int min, int max) → WHERE age BETWEEN ? AND ?.
+
+
+Combine with logical connectors
+And, Or can chain multiple conditions.
+Example: findByFirstNameAndLastName(String first, String last) → WHERE first_name = ? AND last_name = ?.
+
+
+Support for sorting and limiting
+OrderBy + property + direction (Asc, Desc).
+Example: findByAgeOrderByLastNameAsc(int age) → WHERE age = ? ORDER BY last_name ASC.
