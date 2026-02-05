@@ -1,6 +1,7 @@
 package com.springbank.ui;
 
 import com.springbank.entities.Account;
+import com.springbank.entities.Transaction;
 import com.springbank.exception.AmountException;
 import com.springbank.exception.UserNotFoundException;
 import com.springbank.exception.WrongPasswordException;
@@ -111,5 +112,24 @@ public class MenuController {
 
     public void logout() {
         UserService.setCurrentUser();
+    }
+
+    public void printTransaction(int accId){
+        System.out.println("---------------------------------------------------------------");
+        System.out.print("Trans_id:    User ID:     Account id:     Amount:        Type: \n");
+       for(Transaction tran : transactionService.getTransactionList(UserService.getCurrentUserId() , accId)){
+           System.out.println(tran);
+       }
+        System.out.println("---------------------------------------------------------------");
+    }
+
+    public void registerUser(String userId , String password) {
+        if(userService.existUserId(userId, password)) {
+            System.out.println("User " + userId + " already exists");
+        }
+        else {
+            userService.createUser(userId , password);
+            System.out.println("User " + userId + " created successfully");
+        }
     }
 }

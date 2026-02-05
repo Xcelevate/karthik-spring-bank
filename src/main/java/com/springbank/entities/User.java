@@ -8,10 +8,11 @@ import java.util.List;
 @Entity
 public class User {
     @Id
+    @Column(unique = true, nullable = false)
     private String userId;
 
-    @Column(unique = true, nullable = false)
     private String password;
+
 
 
 

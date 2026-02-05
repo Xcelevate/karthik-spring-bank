@@ -55,7 +55,7 @@ public class AccountService {
         }
         acc.setBalance(acc.getBalance() + amt);
         accountRepository.save(acc);
-        Transaction trans = new Transaction(currentUserId , acc.getAccountId() , amt , "credit");
+        Transaction trans = new Transaction(currentUserId , acc.getAccountId() , amt , "CREDIT");
         transactionRepository.save(trans);
 
     }
@@ -73,7 +73,7 @@ public class AccountService {
         }
         acc.setBalance(acc.getBalance() - amt);
         accountRepository.save(acc);
-        Transaction trans = new Transaction(currentUserId , acc.getAccountId() , amt , "Debit");
+        Transaction trans = new Transaction(currentUserId , acc.getAccountId() , amt , "DEBIT");
         transactionRepository.save(trans);
     }
 }

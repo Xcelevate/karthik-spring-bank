@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.springbank.exception.AccountNotFoundException;
 
+import java.util.List;
+
 @Service
 public class TransactionService {
     AccountRepository accountRepo;
@@ -49,5 +51,9 @@ public class TransactionService {
         else {
             throw new AccountNotFoundException("Account not found");
         }
+    }
+
+    public List<Transaction> getTransactionList(String uid, int accId) {
+        return transactionRepository.findByUserIdAndAccId(uid , accId);
     }
 }

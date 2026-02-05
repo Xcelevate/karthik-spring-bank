@@ -38,4 +38,13 @@ public class UserService {
             System.out.println("sleep interrupted");
         }
     }
+
+    public void createUser(String userId, String password) {
+        User user = new User(userId , password);
+        userRepo.save(user);
+    }
+
+    public boolean existUserId(String userId, String password) {
+        return  userRepo.existsById(userId);
+    }
 }

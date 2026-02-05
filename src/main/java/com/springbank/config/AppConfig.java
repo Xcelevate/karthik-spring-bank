@@ -25,10 +25,10 @@ public class AppConfig {
 
     @Bean
     public DataSource dataSource(
-            @Value("${spring.datasource.url}") String url,
-            @Value("${spring.datasource.username}") String username,
-            @Value("${spring.datasource.password}") String password,
-            @Value("${spring.datasource.driver-class-name}") String driverName
+            @Value("${datasource.url}") String url,
+            @Value("${datasource.username}") String username,
+            @Value("${datasource.password}") String password,
+            @Value("${datasource.driver-class-name}") String driverName
     ) {
         HikariConfig config = new HikariConfig();
         config.setJdbcUrl(url);

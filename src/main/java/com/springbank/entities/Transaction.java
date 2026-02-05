@@ -29,7 +29,7 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return String.format("Transaction id: %d  \nUser Name: %s \nAccount id: %d  \nAmount: %f  \nType: %s ", this.transactionId, this.userId, this.accId, (float)this.amount, this.type);
+        return String.format(" %d          %s         %d         %f        %s ", this.transactionId, this.userId, this.accId, (float)this.amount * 100 / 100, this.type);
     }
 
     public String getUser() {

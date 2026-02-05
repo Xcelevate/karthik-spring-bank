@@ -20,7 +20,7 @@ public class Menu {
 
     public void loginPage() {
         System.out.println("\nWelcome to Karthik's Bank Login Menu\n");
-        System.out.println("1. Login\n2. Exit");
+        System.out.println("1. Login\n2. Sign up\n3. Exit");
         System.out.print("Choice: ");
         String choice = kk.nextLine();
 
@@ -36,7 +36,14 @@ public class Menu {
                     System.out.print("\nWelcome to Karthik's Bank \n");
                 }
             }
-            case "2" -> System.exit(0);
+            case "2" -> {
+                System.out.print("Please enter your userId: ");
+                String userId = kk.nextLine();
+                System.out.print("Please enter your password: ");
+                String password = kk.nextLine();
+                menuControl.registerUser(userId , password);
+            }
+            case "3" -> System.exit(0);
             default -> System.out.println("Invalid choice. Please try again");
         }
     }
@@ -48,7 +55,7 @@ public class Menu {
     public void showMainMenu() {
         System.out.println("\n--- MAIN MENU ---");
         System.out.print("1. View My Accounts\n" + "2. Create New Account\n" + "3. View Balance\n");
-        System.out.println("4. Deposit Money\n" + "5. Withdraw Money\n" + "6. Transfer Money\n" + "7. Logout");
+        System.out.println("4. Deposit Money\n" + "5. Withdraw Money\n" + "6. Transfer Money\n" + "7.Account Transaction Details\n" + "8. Logout");
         System.out.print("Selection: ");
         String choice = kk.nextLine();
         try {
@@ -112,7 +119,12 @@ public class Menu {
                         default -> System.out.println("Invalid choice. Please try again");
                     }
                 }
-                case "7" -> {
+                case "7" ->{
+                    System.out.print("Enter the Account Number: ");
+                    int  accNo = Integer.parseInt(kk.nextLine());
+                    menuControl.printTransaction(accNo);
+                }
+                case "8" -> {
                     currentUser = false;
                     menuControl.logout();
                     System.out.println("logged out ");
