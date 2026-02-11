@@ -1,6 +1,6 @@
 package com.springbank.repository;
 
-import com.springbank.entities.Transaction;
+import com.springbank.entity.Transaction;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

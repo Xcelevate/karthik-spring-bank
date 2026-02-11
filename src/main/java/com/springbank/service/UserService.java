@@ -1,6 +1,6 @@
 package com.springbank.service;
 
-import com.springbank.entities.User;
+import com.springbank.entity.User;
 import com.springbank.exception.UserNotFoundException;
 import com.springbank.exception.WrongPasswordException;
 import com.springbank.repository.UserRepository;

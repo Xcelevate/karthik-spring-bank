@@ -1,7 +1,7 @@
 package com.springbank.ui;
 
-import com.springbank.entities.Account;
-import com.springbank.entities.Transaction;
+import com.springbank.entity.Account;
+import com.springbank.entity.Transaction;
 import com.springbank.exception.AmountException;
 import com.springbank.exception.UserNotFoundException;
 import com.springbank.exception.WrongPasswordException;

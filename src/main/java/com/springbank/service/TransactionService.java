@@ -1,6 +1,6 @@
 package com.springbank.service;
 
-import com.springbank.entities.Transaction;
+import com.springbank.entity.Transaction;
 import com.springbank.exception.AmountException;
 import com.springbank.repository.AccountRepository;
 import com.springbank.repository.TransactionRepository;
