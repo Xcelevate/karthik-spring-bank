@@ -6,9 +6,12 @@ import com.springbank.entity.Transaction;
 import com.springbank.exception.AmountException;
 import com.springbank.repository.AccountRepository;
 import com.springbank.repository.TransactionRepository;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import com.springbank.exception.AccountNotFoundException;
+import org.springframework.transaction.annotation.Isolation;
+
 import java.util.List;
 
 @Service
@@ -22,11 +25,12 @@ public class AccountService {
         transactionRepository = tr;
     }
 
-
+    @Transactional(readOnly = true)
     public List<Account> getAccounts() {
         return accountRepository.findByUserId(UserService.getCurrentUserId());
     }
 
+    @Transactional(rollbackFor = AmountException.class)
     public void newAccount(String uId , double amt) throws AmountException {
         if(amt < 100) {
             throw new AmountException("Initial Amount at least 100. ");
@@ -36,7 +40,7 @@ public class AccountService {
     }
 
 
-
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     public double getBalanceAmount(int accNo, String currentUserId) throws AccountNotFoundException {
         Account acc = accountRepository.findByAccountIdAndUserId(accNo, currentUserId);
         if(acc == null ) {
@@ -45,6 +49,7 @@ public class AccountService {
         return acc.getBalance();
     }
 
+    @Transactional(isolation = Isolation.SERIALIZABLE)
     public void deposit(int accNo, double amt , String currentUserId) throws AccountNotFoundException , AmountException {
         if (amt <= 0) {
             throw new AmountException("Amount must be greater than 0");
@@ -60,6 +65,7 @@ public class AccountService {
 
     }
 
+    @Transactional(isolation = Isolation.SERIALIZABLE)
     public void withdraw(int accNo, double amt, String currentUserId) throws AccountNotFoundException , AmountException {
         if (amt <= 0) {
             throw new AmountException("Amount must be greater than 0");

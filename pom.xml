@@ -3,22 +3,23 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.springbank</groupId>
-    <artifactId>SpringBank</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>springbank</artifactId>
+    <version>1.2.0</version>
     <packaging>jar</packaging>
 
     <name>SpringBank</name>
-    <url>http://maven.apache.org</url>
+    <url>https://maven.apache.org</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
+        <!-- JUint dependenc -->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.10.2</version>
             <scope>test</scope>
         </dependency>
         <!-- Spring Data JPA -->

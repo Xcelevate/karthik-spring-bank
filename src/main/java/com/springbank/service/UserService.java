@@ -4,6 +4,7 @@ import com.springbank.entity.User;
 import com.springbank.exception.UserNotFoundException;
 import com.springbank.exception.WrongPasswordException;
 import com.springbank.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -38,13 +39,13 @@ public class UserService {
             System.out.println("sleep interrupted");
         }
     }
-
+    @Transactional
     public void createUser(String userId, String password) {
         User user = new User(userId , password);
         userRepo.save(user);
     }
 
-    public boolean existUserId(String userId, String password) {
-        return  userRepo.existsById(userId);
+    public boolean existUserId(String userId) {
+        return  userRepo.existsByUserId(userId);
     }
 }

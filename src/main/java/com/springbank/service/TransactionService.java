@@ -7,6 +7,8 @@ import com.springbank.repository.TransactionRepository;
 import org.springframework.stereotype.Service;
 
 import com.springbank.exception.AccountNotFoundException;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,6 +24,7 @@ public class TransactionService {
         this.accountService = accountService;
     }
 
+    @Transactional(isolation = Isolation.SERIALIZABLE)
     public void transferAmount(String userId, int fromAccNo, int toAccNo, double amount) throws AccountNotFoundException, AmountException {
         boolean accountExist = accountRepo.existsByAccountIdAndUserId(fromAccNo, userId) && accountRepo.existsByAccountIdAndUserId(toAccNo, userId);
 
@@ -38,6 +41,7 @@ public class TransactionService {
     }
 
 
+    @Transactional(isolation = Isolation.SERIALIZABLE)
     public void transferAmount(String fromUserId , int fromAccNo, String toUserId , int toAccNo, double amount) throws AccountNotFoundException, AmountException {
         boolean accountExist = accountRepo.existsByAccountIdAndUserId(fromAccNo , fromUserId) && accountRepo.existsByAccountIdAndUserId(toAccNo, toUserId);
         if (accountExist) {
@@ -53,6 +57,7 @@ public class TransactionService {
         }
     }
 
+    @Transactional(isolation = Isolation.READ_COMMITTED, readOnly = true)
     public List<Transaction> getTransactionList(String uid, int accId) {
         return transactionRepository.findByUserIdAndAccId(uid , accId);
     }

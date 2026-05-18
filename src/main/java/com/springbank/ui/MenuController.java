@@ -123,9 +123,9 @@ public class MenuController {
         System.out.println("---------------------------------------------------------------");
     }
 
-    public void registerUser(String userId , String password) {
-        if(userService.existUserId(userId, password)) {
-            System.out.println("User " + userId + " already exists");
+    public void registerUser(String userId , String password) throws UserNotFoundException {
+        if(userService.existUserId(userId)) {
+            throw new UserNotFoundException("User " + userId + " already exists");
         }
         else {
             userService.createUser(userId , password);

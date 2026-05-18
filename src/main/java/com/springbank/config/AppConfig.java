@@ -5,14 +5,13 @@ import com.zaxxer.hikari.HikariDataSource;
 import jakarta.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
 import javax.sql.DataSource;
 import java.util.Properties;
 import java.util.Scanner;
@@ -21,6 +20,7 @@ import java.util.Scanner;
 @EnableJpaRepositories(basePackages = "com.springbank.repository")
 @ComponentScan(basePackages = "com.springbank")
 @PropertySource("classpath:application.properties")
+@EnableTransactionManagement
 public class AppConfig {
 
     @Bean
@@ -44,7 +44,7 @@ public class AppConfig {
                                                                        @Qualifier("myProperties") Properties hibernateProperties) {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource);
-        em.setPackagesToScan("com.springbank.entities");
+        em.setPackagesToScan("com.springbank.entity");
         em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         em.setJpaProperties(hibernateProperties);
         em.setEntityManagerFactoryInterface(EntityManagerFactory.class);
@@ -72,6 +72,7 @@ public class AppConfig {
     }
 
     @Bean
+    @Scope("singleton")
     public Scanner scanner() {
         return new Scanner(System.in);
     }

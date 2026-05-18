@@ -1,6 +1,5 @@
 package com.springbank.ui;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.InputMismatchException;
@@ -12,7 +11,7 @@ public class Menu {
     MenuController menuControl;
     boolean currentUser;
 
-    public Menu(MenuController menuController ,Scanner scanner) {
+    public Menu(MenuController menuController, Scanner scanner) {
         kk = scanner;
         menuControl = menuController;
     }
@@ -41,7 +40,7 @@ public class Menu {
                 String userId = kk.nextLine();
                 System.out.print("Please enter your password: ");
                 String password = kk.nextLine();
-                menuControl.registerUser(userId , password);
+                menuControl.registerUser(userId, password);
             }
             case "3" -> System.exit(0);
             default -> System.out.println("Invalid choice. Please try again");
@@ -119,9 +118,9 @@ public class Menu {
                         default -> System.out.println("Invalid choice. Please try again");
                     }
                 }
-                case "7" ->{
+                case "7" -> {
                     System.out.print("Enter the Account Number: ");
-                    int  accNo = Integer.parseInt(kk.nextLine());
+                    int accNo = Integer.parseInt(kk.nextLine());
                     menuControl.printTransaction(accNo);
                 }
                 case "8" -> {
