@@ -20,7 +20,7 @@ public class AccountService {
     AccountRepository accountRepository;
     TransactionRepository transactionRepository;
 
-    AccountService(AccountRepository ar , TransactionRepository tr) {
+    public AccountService(AccountRepository ar, TransactionRepository tr) {
         accountRepository = ar;
         transactionRepository = tr;
     }

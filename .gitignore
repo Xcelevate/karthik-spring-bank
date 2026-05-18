@@ -11,6 +11,7 @@ target/
 .idea/libraries/
 .idea/inspectionProfiles/
 temp/
+SpringBank.iml
 *.iws
 *.iml
 *.ipr

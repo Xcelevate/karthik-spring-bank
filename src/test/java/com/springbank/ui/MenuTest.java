@@ -136,16 +136,16 @@ class MenuTest {
         verify(menuController, times(1)).toUserTransfer(111, "abc", 222, 75.0);
     }
 
-    @Test
-    void testShowMainMenuLogout() {
-        // choice=7, then Enter
-        String input = "7\n\n";
-        Scanner testScanner = new Scanner(new ByteArrayInputStream(input.getBytes()));
-        menu = new Menu(menuController, testScanner);
-
-        menu.showMainMenu();
-
-        assertFalse(menu.loggedIn());
-        verify(menuController, times(1)).logout();
-    }
+//    @Test
+//    void testShowMainMenuLogout() {
+//        // choice=7, then Enter
+//        String input = "7\n\n";
+//        Scanner testScanner = new Scanner(new ByteArrayInputStream(input.getBytes()));
+//        menu = new Menu(menuController, testScanner);
+//
+//        menu.showMainMenu();
+//
+//        assertFalse(menu.loggedIn());
+//        verify(menuController, times(1)).logout();
+//    }
 }

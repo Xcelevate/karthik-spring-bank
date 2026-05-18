@@ -14,7 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import javax.security.auth.login.AccountNotFoundException;
+import com.springbank.exception.AccountNotFoundException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -84,7 +84,7 @@ public class AccountServiceTest {
             int accNo = 123;
             String userId = "john";
 
-            Account acc = new Account("john" , 123);
+            Account acc = new Account("john", 123);
             when(accountRepository.findByAccountIdAndUserId(accNo, userId)).thenReturn(acc);
 
             accountService.getBalanceAmount(accNo, userId);
@@ -94,10 +94,10 @@ public class AccountServiceTest {
     }
 
     @Nested
-    class Deposit{
+    class Deposit {
 
         @Test
-        void throwAmountExceptionWhenLesThanZero(){
+        void throwAmountExceptionWhenLesThanZero() {
             int accNo = 123;
             String userId = "Karthik";
             double balance = 0;
@@ -105,7 +105,7 @@ public class AccountServiceTest {
         }
 
         @Test
-        void throwAmountExceptionWhenAmountIsNegative(){
+        void throwAmountExceptionWhenAmountIsNegative() {
             int accNo = 123;
             String userId = "Karthik";
             double balance = -100;
@@ -113,11 +113,11 @@ public class AccountServiceTest {
         }
 
         @Test
-        void throwAccountNotFoundExceptionWhenUserNotFound(){
+        void throwAccountNotFoundExceptionWhenUserNotFound() {
             int accNo = 123;
             String userId = "Karthik";
             when(accountRepository.findByAccountIdAndUserId(accNo, userId)).thenReturn(null);
-            assertThrows(AccountNotFoundException.class , () -> accountService.deposit(accNo , 523, userId));
+            assertThrows(AccountNotFoundException.class, () -> accountService.deposit(accNo, 523, userId));
         }
 
         @Test
@@ -128,10 +128,11 @@ public class AccountServiceTest {
             Account acc = new Account(userId, 42);
             when(accountRepository.findByAccountIdAndUserId(accNo, userId)).thenReturn(acc);
 
-            accountService.deposit(accNo , amt , userId);
+            accountService.deposit(accNo, amt, userId);
 
-            verify(accountRepository ,  atMostOnce()).save(any(Account.class));
+            verify(accountRepository, atMostOnce()).save(any(Account.class));
         }
+
         @Test
         void checkTransactionSuccess() throws AccountNotFoundException {
             int accNo = 123;
@@ -140,16 +141,16 @@ public class AccountServiceTest {
             Account acc = new Account(userId, 0);
             when(accountRepository.findByAccountIdAndUserId(accNo, userId)).thenReturn(acc);
 
-            accountService.deposit(accNo , amt , userId);
+            accountService.deposit(accNo, amt, userId);
 
-            verify(accountRepository ,  atMostOnce()).save(any(Account.class));
+            verify(accountRepository, atMostOnce()).save(any(Account.class));
             verify(transactionRepository, atMostOnce()).save(any(Transaction.class));
 
         }
     }
 
     @Nested
-    class Withdraw{
+    class Withdraw {
         //@Test
     }
 }
